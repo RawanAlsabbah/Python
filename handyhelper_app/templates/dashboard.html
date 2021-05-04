@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashbord</title>
+  </head>
+  <style>
+
+table, td, th {
+  border: 1px solid black;
+}
+
+table {
+  width: 70%;
+  border-collapse: collapse;
+}
+a{
+    display: inline-table;
+        }
+              .black-belt{
+  color:#A82EFF
+}
+  </style>
+  <body>
+
+    <a href="/logout">Logout</a> 
+        <a href="/jobs/new"><button>New job!!</button></a>
+
+
+    <h1>Hello {{ user.first_name}}!</h1>
+    <h3>Everyone's jobs:</h3>
+    <table>
+      <thead>
+        <th>Job</th>
+        <th> Location</th>
+        <th>Actions</th>
+      </thead>
+      {% for job in all_jobs.all %}
+      {% if job.give_up == True %}
+
+          <tr>
+          <td>{{job.title}}</td>
+          <td>{{job.location}}</td>
+          <td>
+            <a href="/jobs/{{job.id}}">View </a> |
+            {% if user.id == job.posted_by.id %}
+            <a href="/jobs/{{job.id}}/delete">Remove</a> |
+            <a href="/jobs/{{job.id}}/edit">Edit</a>
+            {% endif %}
+            <a href="/jobs/{{job.id}}/add">Add</a>
+            
+          </td>
+      </tr>
+      {% endif %}  
+
+      {% endfor %}
+    </table>
+
+
+    <h3 class="black-belt">{{ user.first_name}}'s jobs:</h3>
+    <table>
+      <thead>
+        <th>Job</th>
+        <th>Action</th>
+      </thead>
+      {% for job in all_jobs %}
+      {% if job.give_up == False %}
+
+      <tr>
+        <td>{{job.title}}</td>
+       
+           <td>
+            {% if user != wish.posted_by %}
+            <a href="/jobs/{{job.id}}"> View </a> |
+            <a href="/jobs/{{job.id}}/delete"> Done</a>|
+            <a href="/jobs/{{job.id}}/give_up"> Give up</a>
+            {% endif %}  
+    
+    
+            </td>
+      </tr>
+      {% endif %}  
+
+      {% endfor %}
+    </table>
+  </body>
+</html>

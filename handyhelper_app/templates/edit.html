@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Wish</title>
+    <style>
+        form {
+            border: 2px solid black;
+            width: 400px;
+            padding: 30px;
+        }
+    
+    
+        a {
+            margin-left: 90%;
+        }
+    </style>
+  </head>
+  <body>
+    <a href="/logout">Logout</a>
+    <h1>Hello {{ user.first_name}}! Let's edit your job!</h1>
+
+    <form action="/jobs/{{job.id}}/update" method="POST">
+        {% csrf_token %}
+        <p>Title: <input type="text" name="title" value="{{ job.title}}"/> </p>
+        <p>Description<input type="text" name="desc" value="{{ job.description}}"/></p>
+        <p>Location<input type="text" name="location" value="{{ job.location}}"/></p>
+
+        <button name="cancel">Cancel</button>
+        <button type="submit">Edit!</button>
+
+    </form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+  </body>
+</html>

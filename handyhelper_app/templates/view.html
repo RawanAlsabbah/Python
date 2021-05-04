@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show </title> 
+     <style>
+  .a{
+    margin-left: 90%;
+}
+.view{
+  border: 2px solid black;  
+  width: 700px;
+}
+.black-belt{
+  color:#A82EFF
+}
+</style>
+  </head>
+
+  <body>
+    <a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a>
+    <h1>Hello {{user.first_name}}! There are job details !!</h1>
+    <h2>  {{this_job.title}}</h2>
+    <div class="view">
+    <p> {{this_job.description }}</p>
+    <p>Location: {{ this_job.location }}</p>
+    <p>Posted by : {{ this_job.posted_by.first_name }}</p>
+    <p>Posted on : {{ this_job.created_at}}</p>
+    <p class="black-belt">Categories : {{ this_job.category}}</p>
+    
+</div>
+    <br>
+    <a href="/jobs/{{this_job.id}}/add"> Add to my jobs  </a>
+
+  </body>
+</html>

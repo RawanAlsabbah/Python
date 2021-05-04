@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Job</title>
+  </head>
+  <style>
+      form{
+        border: 2px solid black;
+        width: 400px;
+        padding: 30px;
+      }
+      h3{
+          color: red;
+      }
+      a{
+          margin-left: 90%;
+      }
+      .black-belt{
+  color:#A82EFF
+}
+  </style>
+  <body>
+    <a href="/logout">Logout</a>
+    <h1>Hello {{ user.first_name}}! Create a job!</h1>    
+    <h3> A wish must consist of at least 3 characters!</h3>
+    <h3>A description must be provided!</h3>
+    <form action="/jobs/create" method="POST">
+    {% csrf_token %}
+    <p>Title: <input type="text" name="title" /></p>
+    <p>Description<input type="text" name="desc" /></p>
+    <p>Location<input type="text" name="location" /></p>
+    <div class="black-belt">
+   Category : 
+   <br>
+    <input type="checkbox" id="job1" name="category" value="Pet care">
+    <label for="job1"> Pet care</label><br>
+    <input type="checkbox" id="job2" name="category" value="Electrical">
+    <label for="job2"> Electrical</label><br>
+    <input type="checkbox" id="job3" name="category" value="Garden">
+    <label for="job3"> Garden</label><br><br>
+     <p>Other: <input type="text" name="other" /></p>
+       <div >
+    <button name="cancel">Cancel</button>
+    <button type="submit">Submit!</button>
+
+    </form>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+        {{ message }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </body>
+</html>
